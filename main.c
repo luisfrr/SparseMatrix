@@ -9,8 +9,8 @@ struct Node
     int info;
     int rowIndex;
     int colIndex;
-    Node *next; // Next Column
-    Node *down; // Next Row
+    Node *nextColumn; // Next Column
+    Node *nextRow; // Next Row
 };
 
 struct Matrix
@@ -164,18 +164,18 @@ void createMatrix(Matrix *mx, int totalRows, int totalColumns)
 
         if (i == 0) // the first pointer
         {
-            mx->rowPtr[i]->down = mx->rowPtr[i + 1];
-            mx->rowPtr[i]->next = mx->colPtr[i + 1]; //next column, just once
+            mx->rowPtr[i]->nextRow = mx->rowPtr[i + 1];
+            mx->rowPtr[i]->nextColumn = mx->colPtr[i + 1]; //nextColumn column, just once
         }
         else if (i == totalRows) // the last pointer 
         {
-            mx->rowPtr[i]->down = mx->rowPtr[0]; // come back to the first
-            mx->rowPtr[i]->next = mx->rowPtr[i]; // next column point to the current row
+            mx->rowPtr[i]->nextRow = mx->rowPtr[0]; // come back to the first
+            mx->rowPtr[i]->nextColumn = mx->rowPtr[i]; // nextColumn column point to the current row
         }
         else
         {
-            mx->rowPtr[i]->down = mx->rowPtr[i + 1]; // next row
-            mx->rowPtr[i]->next = mx->rowPtr[i]; // next column point to the current row
+            mx->rowPtr[i]->nextRow = mx->rowPtr[i + 1]; // nextColumn row
+            mx->rowPtr[i]->nextColumn = mx->rowPtr[i]; // nextColumn column point to the current row
         }
     }
 
@@ -186,18 +186,18 @@ void createMatrix(Matrix *mx, int totalRows, int totalColumns)
 
         if (i == 0) // the first pointer
         {
-            mx->colPtr[i]->next = mx->colPtr[i + 1];
-            mx->colPtr[i]->down = mx->rowPtr[i + 1]; //next row, just once
+            mx->colPtr[i]->nextColumn = mx->colPtr[i + 1];
+            mx->colPtr[i]->nextRow = mx->rowPtr[i + 1]; //nextColumn row, just once
         }
         else if (i == totalColumns) // the last pointer 
         {
-            mx->colPtr[i]->next = mx->colPtr[0]; // come back to the first
-            mx->colPtr[i]->down = mx->colPtr[i]; // next row point to the current column
+            mx->colPtr[i]->nextColumn = mx->colPtr[0]; // come back to the first
+            mx->colPtr[i]->nextRow = mx->colPtr[i]; // nextColumn row point to the current column
         }
         else
         {
-            mx->colPtr[i]->next = mx->colPtr[i + 1]; // next column
-            mx->colPtr[i]->down = mx->colPtr[i]; // next row point to the current column
+            mx->colPtr[i]->nextColumn = mx->colPtr[i + 1]; // nextColumn column
+            mx->colPtr[i]->nextRow = mx->colPtr[i]; // nextColumn row point to the current column
         }
     }
 
@@ -231,30 +231,33 @@ void insertNode(Matrix *mx, int rowIndex, int colIndex, int nonZeroValue)
     }
 
     Node *newNode = (Node *)calloc(1, sizeof(Node));
-    Node *current = (Node *)calloc(1, sizeof(Node));
-    Node *next = (Node *)calloc(1, sizeof(Node));
 
     newNode->rowIndex = rowIndex; // 1
     newNode->colIndex = colIndex; // 1
     newNode->info = nonZeroValue;
     
+    Node *currentNode = (Node *)calloc(1, sizeof(Node));
+    Node *tempNext = (Node *)calloc(1, sizeof(Node));
+
     // Recorrer las filas hasta encontrar el correcto
-    for (int i = 0; i <= mx->totalRows; i++)
+    for (int i = 0; i <= mx->totalRows; i++) // Recorrer row headnodes
     {
+        
         if(mx->rowPtr[i]->rowIndex == rowIndex) // find row head 
         {
-            /*if(mx->rowPtr[i]->)
+            currentNode = mx->rowPtr[i]; // in this moment row headnode
 
-            while (mx->rowPtr[i].)
-            {
-                
-            }*/
+            //if(mx->rowPtr[i]->)
+
+            //while (currentNode->nextColumn != mx->)
+
             
             
         }
     }
     
     //Recorrer las filas
+        //Variable temporal columnas
     //Encontrar la fila correcta
     //Recorrer las columnas
 
