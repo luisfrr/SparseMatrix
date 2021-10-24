@@ -17,8 +17,8 @@ struct Matrix
 {
     int totalRows;
     int totalColumns;
-    int totalElements;
-    int currentElements;
+    int totalElements; // SI QUIEREN LO QUITAN
+    int currentElements; // SI QUIEREN LO QUITAN
     Node *head_node;
 };
 
@@ -237,7 +237,7 @@ int main()
             case 6:
                 printf("\n### Sum two matrix ###.\n");
 
-                if(matrixA.totalRows == 0 && matrixB.totalRows == 0)
+                if(matrixA.totalRows == 0 || matrixB.totalRows == 0)
                 {
                     printf("You need to create some matrices.\n");
                     system("Pause");
@@ -267,7 +267,7 @@ int main()
             case 7:
                 printf("\n### Multiply two matrix ###.\n");
 
-                if(matrixA.totalRows == 0 && matrixB.totalRows == 0)
+                if(matrixA.totalRows == 0 || matrixB.totalRows == 0)
                 {
                     printf("You need to create some matrices.\n");
                     system("Pause");
